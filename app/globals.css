@@ -122,9 +122,13 @@
   transform: scaleX(var(--mx, 1));
 }
 
-/* SplitText line mask — keeps each line clipped while we slide it up */
+/* SplitText line mask — clips the line while it slides up from below.
+   Padding gives descenders (g, y, p, q) room inside the clipped box;
+   negative margin keeps the visual line spacing unchanged. */
 .split-line {
   overflow: hidden;
   display: block;
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 

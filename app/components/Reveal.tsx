@@ -71,7 +71,11 @@ export function RevealObserver() {
             duration: 1.1,
             stagger: 0.1,
             ease: "power2.out",
-            onComplete: () => split.revert(),
+            onComplete: () => {
+              split.lines.forEach((l) => {
+                (l as HTMLElement).style.overflow = "visible";
+              });
+            },
           },
           "-=0.45"
         );
@@ -106,7 +110,11 @@ export function RevealObserver() {
               duration: 0.9,
               ease: "power3.out",
               stagger: 0.08,
-              onComplete: () => split.revert(),
+              onComplete: () => {
+                split.lines.forEach((l) => {
+                  (l as HTMLElement).style.overflow = "visible";
+                });
+              },
             }),
         });
       });
@@ -153,6 +161,33 @@ export function RevealObserver() {
             ease: "power3.out",
             stagger: 0.08,
           }),
+      });
+
+      // --- Africa image: scale-down on scroll (visual only, no layout shift) ---
+      gsap.utils.toArray<HTMLElement>("[data-africa-image]").forEach((el) => {
+        const initialScale = () => {
+          const parent = el.parentElement;
+          const w = parent
+            ? parent.getBoundingClientRect().width
+            : window.innerWidth;
+          return Math.max(1, window.innerWidth / Math.max(1, w));
+        };
+        gsap.fromTo(
+          el,
+          { scale: initialScale, transformOrigin: "center top" },
+          {
+            scale: 1,
+            ease: "none",
+            immediateRender: true,
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "top 20%",
+              scrub: 0.5,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       });
 
       // --- Parallax ---

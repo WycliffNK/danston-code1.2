@@ -336,7 +336,7 @@ function AfricaTriplet() {
 
 export function AfricaMission() {
   return (
-    <section className="bg-cream-warm px-[var(--rail-x)] pt-24 pb-44 max-md:pt-16 max-md:pb-28">
+    <section className="relative bg-cream-warm overflow-hidden px-[var(--rail-x)] pt-24 pb-44 max-md:pt-16 max-md:pb-28">
       <div>
         <AfricaImage />
         <AfricaIntro />
