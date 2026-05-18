@@ -11,13 +11,46 @@ import {
 } from "@/lib/assessment";
 
 const TOTAL_STEPS = 10;
+const EMAIL_STEP = 11;
+
+const HOLDING_BACK_OPTIONS = [
+  "Clarity on direction",
+  "Team alignment",
+  "My own leadership",
+  "Communication",
+  "External pressure",
+  "I'm not sure yet",
+] as const;
+
+const DURATION_OPTIONS = [
+  "It's recent (under 6 months)",
+  "1–2 years",
+  "3 or more years",
+  "It's always been there",
+] as const;
+
+const COACH_BEFORE_OPTIONS = [
+  "Yes, and it helped",
+  "Yes, but it didn't land",
+  "No, this would be the first time",
+  "I prefer not to say",
+] as const;
+
+const REGION_OPTIONS = [
+  "Africa",
+  "Europe",
+  "Middle East",
+  "Americas",
+  "Asia",
+  "Other",
+] as const;
 
 type FormState = {
   audience: Audience | "";
-  challenge: string;
+  holdingBack: string;
   duration: string;
-  triedBefore: string;
-  successPicture: string;
+  coachedBefore: string;
+  region: string;
   cost: string;
   commitment: number | null;
   workMode: WorkMode | "";
@@ -28,10 +61,10 @@ type FormState = {
 
 const INITIAL: FormState = {
   audience: "",
-  challenge: "",
+  holdingBack: "",
   duration: "",
-  triedBefore: "",
-  successPicture: "",
+  coachedBefore: "",
+  region: "",
   cost: "",
   commitment: null,
   workMode: "",
@@ -78,26 +111,24 @@ export function Assessment() {
   const canAdvance = () => {
     switch (step) {
       case 1: return state.audience !== "";
-      case 2: return state.challenge.trim().length > 0;
+      case 2: return state.holdingBack.trim().length > 0;
       case 3: return state.duration.trim().length > 0;
-      case 4: return state.triedBefore.trim().length > 0;
-      case 5: return state.successPicture.trim().length > 0;
+      case 4: return state.coachedBefore.trim().length > 0;
+      case 5: return state.region.trim().length > 0;
       case 6: return state.cost.trim().length > 0;
       case 7: return state.commitment !== null;
       case 8: return state.workMode !== "";
       case 9: return state.source.trim().length > 0;
-      case 10:
-        return (
-          state.nextStep.trim().length > 0 &&
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())
-        );
+      case 10: return state.nextStep.trim().length > 0;
+      case EMAIL_STEP:
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim());
       default: return true;
     }
   };
 
   const next = () => {
     if (!canAdvance()) return;
-    if (step < TOTAL_STEPS) setStep(step + 1);
+    if (step < EMAIL_STEP) setStep(step + 1);
     else void submit();
   };
 
@@ -110,10 +141,10 @@ export function Assessment() {
     setErrorMessage(null);
     const payload: AssessmentPayload = {
       audience: state.audience,
-      challenge: state.challenge.trim(),
+      holdingBack: state.holdingBack.trim(),
       duration: state.duration.trim(),
-      triedBefore: state.triedBefore.trim(),
-      successPicture: state.successPicture.trim(),
+      coachedBefore: state.coachedBefore.trim(),
+      region: state.region.trim(),
       cost: state.cost.trim(),
       commitment: state.commitment,
       workMode: state.workMode,
@@ -132,7 +163,7 @@ export function Assessment() {
         throw new Error(data.error ?? `Request failed (${res.status})`);
       }
       setStatus("done");
-      setStep(TOTAL_STEPS + 1);
+      setStep(EMAIL_STEP + 1);
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Submission failed.");
@@ -148,11 +179,12 @@ export function Assessment() {
           The assessment
         </div>
         <h2 className="reveal font-serif font-normal text-[clamp(40px,5vw,64px)] leading-[1.05] tracking-[-0.4px] mb-7">
-          Is Code 1 right for you?
+          Your diagnosis. Free. Personal.
         </h2>
         <p className="reveal font-sans text-[19px] leading-[1.7] text-cream/75">
-          Ten questions. Under ten minutes. Free. Reviewed personally by Danston
-          or the Code 1 team within 48 hours.
+          Ten questions. Ten minutes. Every response is reviewed personally by
+          Danston or the Code 1 team &mdash; and you will hear back within 48
+          hours with a considered response, not a sequence.
         </p>
       </div>
       <div className="reveal reveal-delay-1 max-w-[720px] mx-auto bg-cream/[0.03] border-[0.5px] border-gold/30 rounded p-14 max-md:p-9 max-md:px-6">
@@ -185,47 +217,70 @@ export function Assessment() {
         )}
 
         {!completed && step === 2 && (
-          <Step n={2} q="What is your single biggest challenge right now?">
-            <textarea
-              className={`${inputBase} min-h-[100px] resize-y leading-[1.6]`}
-              placeholder="In your own words..."
-              value={state.challenge}
-              onChange={(e) => update("challenge", e.target.value)}
-            />
+          <Step n={2} q="What is the main thing holding you back right now?">
+            <div className="grid grid-cols-2 gap-3 mb-9 max-md:grid-cols-1">
+              {HOLDING_BACK_OPTIONS.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  className={`${optionBase} ${state.holdingBack === o ? optionSelected : ""}`}
+                  onClick={() => update("holdingBack", o)}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>
           </Step>
         )}
 
         {!completed && step === 3 && (
-          <Step n={3} q="How long has this been a challenge?">
-            <input
-              type="text"
-              className={inputBase}
-              placeholder="Months, years..."
-              value={state.duration}
-              onChange={(e) => update("duration", e.target.value)}
-            />
+          <Step n={3} q="How long has this been an issue?">
+            <div className="grid grid-cols-2 gap-3 mb-9 max-md:grid-cols-1">
+              {DURATION_OPTIONS.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  className={`${optionBase} ${state.duration === o ? optionSelected : ""}`}
+                  onClick={() => update("duration", o)}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>
           </Step>
         )}
 
         {!completed && step === 4 && (
-          <Step n={4} q="What have you already tried?">
-            <textarea
-              className={`${inputBase} min-h-[100px] resize-y leading-[1.6]`}
-              placeholder="Programmes, coaches, books, courses..."
-              value={state.triedBefore}
-              onChange={(e) => update("triedBefore", e.target.value)}
-            />
+          <Step n={4} q="Have you worked with a coach, consultant, or advisor before?">
+            <div className="grid grid-cols-2 gap-3 mb-9 max-md:grid-cols-1">
+              {COACH_BEFORE_OPTIONS.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  className={`${optionBase} ${state.coachedBefore === o ? optionSelected : ""}`}
+                  onClick={() => update("coachedBefore", o)}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>
           </Step>
         )}
 
         {!completed && step === 5 && (
-          <Step n={5} q="What does success look like for you in 12 months?">
-            <textarea
-              className={`${inputBase} min-h-[100px] resize-y leading-[1.6]`}
-              placeholder="Be as specific as you can..."
-              value={state.successPicture}
-              onChange={(e) => update("successPicture", e.target.value)}
-            />
+          <Step n={5} q="Where are you based?">
+            <div className="grid grid-cols-2 gap-3 mb-9 max-md:grid-cols-1">
+              {REGION_OPTIONS.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  className={`${optionBase} ${state.region === o ? optionSelected : ""}`}
+                  onClick={() => update("region", o)}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>
           </Step>
         )}
 
@@ -296,14 +351,14 @@ export function Assessment() {
               value={state.nextStep}
               onChange={(e) => update("nextStep", e.target.value)}
             />
-            <input
-              type="email"
-              className={inputBase}
-              placeholder="Your email address"
-              value={state.email}
-              onChange={(e) => update("email", e.target.value)}
-            />
           </Step>
+        )}
+
+        {!completed && step === EMAIL_STEP && (
+          <EmailHandoff
+            value={state.email}
+            onChange={(v) => update("email", v)}
+          />
         )}
 
         {completed && <CompletedPanel />}
@@ -334,10 +389,10 @@ export function Assessment() {
                 disabled={!canAdvance() || status === "submitting"}
                 className="ml-auto bg-gold text-navy border-0 font-sans text-[12px] font-medium tracking-[1.5px] uppercase px-9 py-4 rounded-full cursor-pointer transition-all duration-500 ease-smooth hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(201,169,97,0.25)] disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
               >
-                {step === TOTAL_STEPS
+                {step === EMAIL_STEP
                   ? status === "submitting"
-                    ? "Submitting…"
-                    : "Submit assessment"
+                    ? "Sending…"
+                    : "Send my responses"
                   : "Continue →"}
               </button>
             </div>
@@ -378,9 +433,53 @@ function CompletedPanel() {
         Thank you.
       </h3>
       <p className="font-sans text-cream/80 text-[17px] leading-[1.7] max-w-[480px] mx-auto">
-        Your assessment has been received. Danston or a member of the Code 1
-        team will respond personally within 48 hours.
+        Your responses are with Danston. You&rsquo;ll hear back personally
+        within 48 hours &mdash; a considered response, not a sequence.
       </p>
+    </div>
+  );
+}
+
+function EmailHandoff({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    gsap.fromTo(
+      el,
+      { opacity: 0, x: 28 },
+      { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }
+    );
+  }, []);
+  return (
+    <div ref={ref}>
+      <div className="text-gold text-[11px] tracking-[2px] uppercase mb-4">
+        One last thing
+      </div>
+      <div className="font-serif font-normal text-cream text-[28px] leading-[1.3] mb-9">
+        Danston reviews every response personally. Where should we send his
+        feedback?
+      </div>
+      <input
+        type="email"
+        className={inputBase}
+        placeholder="Your email address"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        autoFocus
+      />
     </div>
   );
 }

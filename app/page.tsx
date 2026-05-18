@@ -3,6 +3,7 @@ import { RevealObserver } from "./components/Reveal";
 import {
   About,
   AfricaMission,
+  Books,
   Credibility,
   Footer,
   Hero,
@@ -20,13 +21,14 @@ export default function Home() {
       <RevealObserver />
       <main>
         <Hero />
+        <PullQuote />
         <Problem />
         <Credibility />
-        <System />
-        <PullQuote />
-        <AfricaMission />
         <Pathways />
+        <System />
         <About />
+        <Books />
+        <AfricaMission />
         <Assessment />
       </main>
       <Footer />

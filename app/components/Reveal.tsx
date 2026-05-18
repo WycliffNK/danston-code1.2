@@ -68,8 +68,9 @@ export function RevealObserver() {
           split.lines,
           {
             yPercent: 0,
-            duration: 0.95,
-            stagger: 0.08,
+            duration: 1.1,
+            stagger: 0.16,
+            ease: "power2.out",
             onComplete: () => split.revert(),
           },
           "-=0.45"

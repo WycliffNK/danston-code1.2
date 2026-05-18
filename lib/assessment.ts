@@ -13,10 +13,10 @@ export type WorkMode = (typeof WORK_MODES)[number];
 
 export type AssessmentPayload = {
   audience: Audience;
-  challenge: string;
+  holdingBack: string;
   duration: string;
-  triedBefore: string;
-  successPicture: string;
+  coachedBefore: string;
+  region: string;
   cost: string;
   commitment: number; // 1..10
   workMode: WorkMode;
@@ -32,10 +32,10 @@ export const SHEET_HEADERS = [
   "Submitted at (UTC)",
   "Audience",
   "Email",
-  "Biggest challenge",
+  "Holding back",
   "Duration",
-  "Tried before",
-  "12-month success",
+  "Coached before",
+  "Region",
   "Cost of inaction",
   "Commitment (1-10)",
   "Work mode",
@@ -49,10 +49,10 @@ export function payloadToRow(p: AssessmentPayload): string[] {
     p.submittedAt ?? new Date().toISOString(),
     p.audience,
     p.email,
-    p.challenge,
+    p.holdingBack,
     p.duration,
-    p.triedBefore,
-    p.successPicture,
+    p.coachedBefore,
+    p.region,
     p.cost,
     String(p.commitment),
     p.workMode,

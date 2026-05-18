@@ -10,38 +10,41 @@ export function Hero() {
         <div data-hero-rule className="w-12 h-px bg-gold mb-7" />
         <h1
           data-hero-headline
-          className="font-serif font-normal text-navy text-[clamp(40px,5.5vw,76px)] leading-[1.02] tracking-[-0.6px] mb-7 max-w-[540px]"
+          className="font-serif font-normal text-navy text-[clamp(40px,5.5vw,76px)] leading-[1.02] tracking-[-0.6px] mb-7 max-w-[600px]"
         >
-          Your potential is always the highest priority.
+          You&rsquo;ve built a lot.
+          <span className="block text-gold-dark mt-3.5">
+            But something&rsquo;s off &mdash; and you know it.
+          </span>
         </h1>
         <p
           data-hero-sub
-          className="font-sans text-charcoal-soft text-[18px] leading-[1.6] mb-12 max-w-[460px]"
+          className="font-sans text-charcoal-soft text-[18px] leading-[1.6] mb-5 max-w-[480px]"
         >
-          The Restoration System for leaders and organisations. Restore the
-          leader. Reveal the truth. Scale human intelligence.
+          Code 1 is the restoration system for leaders who are ready to stop
+          leading from performance and start leading from who they actually
+          are.
         </p>
-        <div className="flex flex-wrap items-center gap-5">
+        <div
+          data-hero-sub
+          className="font-sans text-gold-dark text-[10px] font-medium tracking-[3px] uppercase mb-12"
+        >
+          London &middot; Africa &middot; Global
+        </div>
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
           <a
             data-hero-cta
             href="#assessment"
             className="inline-block font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full transition-all duration-500 ease-smooth hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5"
           >
-            Begin assessment
+            Begin Free Assessment &mdash; 10 min
           </a>
           <a
             data-hero-cta
             href="#about"
-            className="group inline-flex items-center gap-3 font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-navy py-3.5 transition-colors duration-500 ease-smooth hover:text-charcoal-soft"
+            className="inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 transition-colors duration-500 ease-smooth hover:text-gold-dark hover:border-gold"
           >
-            <span
-              aria-hidden="true"
-              className="flex items-center justify-center w-9 h-9 border-[0.5px] border-navy rounded-full overflow-hidden transition-all duration-500 ease-smooth group-hover:border-charcoal-soft"
-            >
-              <span className="inline-block transition-transform duration-500 ease-smooth group-hover:translate-y-1">
-                ↓
-              </span>
-            </span>
+            <span aria-hidden="true">↓</span>
             Read Danston&apos;s story
           </a>
         </div>
@@ -51,7 +54,7 @@ export function Hero() {
         className="relative h-full overflow-hidden bg-navy max-md:h-[360px]"
       >
         <Image
-          src="/images/danston-hero.jpg"
+          src="/images/danston-about.jpg"
           alt=""
           fill
           priority
@@ -64,14 +67,12 @@ export function Hero() {
         className="absolute z-10 w-[420px] -bottom-25 left-1/2 -translate-x-1/2 bg-gold text-navy p-9 rounded-sm shadow-[0_30px_80px_rgba(15,27,45,0.35)] max-md:w-[calc(100%-48px)] max-md:max-w-[380px] max-md:-bottom-[70px] max-md:p-7"
       >
         <div className="font-sans text-[10px] tracking-[2.5px] uppercase text-navy/70 mb-4">
-          Three decades of practice
+          Track record
         </div>
-        <div className="font-serif text-[64px] leading-[0.9] mb-3.5 max-md:text-[52px]">
-          30+
-        </div>
-        <div className="font-sans text-[16px] leading-[1.5] text-navy/85">
-          years building leaders and businesses across Africa, Europe, Asia,
-          the Middle East, and the United States.
+        <div className="font-serif text-[22px] leading-[1.4] tracking-[-0.2px] text-navy">
+          47 leaders &middot; 5 regions
+          <br />
+          3 governments &middot; 30 years
         </div>
       </div>
     </section>
@@ -182,6 +183,9 @@ function SystemIntroPanel() {
         <SystemEyebrow />
         <div className="mt-8" />
         <SystemHeadline className="mb-10 max-w-[820px]" />
+        <p className="reveal font-serif text-gold-dark text-[19px] leading-[1.5] mb-6 max-w-[680px]">
+          Here is how the work is done.
+        </p>
         <SystemIntro className="max-w-[680px]" />
       </div>
     </section>
@@ -349,7 +353,7 @@ export function About() {
       <div className="grid grid-cols-[1fr_1.5fr] gap-25 items-center max-md:grid-cols-1 max-md:gap-12">
         <div data-parallax="36" className="relative aspect-[3/4] overflow-hidden bg-navy max-md:max-w-[280px] max-md:mx-auto">
           <Image
-            src="/images/danston-about.jpg"
+            src="/images/danston.png"
             alt=""
             fill
             sizes="(max-width: 768px) 280px, 40vw"
@@ -392,6 +396,101 @@ export function About() {
   );
 }
 
+type Book = {
+  title: string;
+  subtitle: string;
+  body: string;
+  cover?: string;
+  href?: string;
+};
+
+const BOOKS: Book[] = [
+  {
+    title: "[Book one title]",
+    subtitle: "On first impressions.",
+    body: "[Placeholder — short description from Danston. One or two sentences on what the book is about and who it is for.]",
+    cover: undefined,
+    href: undefined,
+  },
+  {
+    title: "[Book two title]",
+    subtitle: "On self-identity.",
+    body: "[Placeholder — short description from Danston. One or two sentences on what the book is about and who it is for.]",
+    cover: undefined,
+    href: undefined,
+  },
+];
+
+export function Books() {
+  return (
+    <section id="books" className="bg-cream px-[var(--rail-x)] py-40 max-md:py-25">
+      <div className="grid grid-cols-[1fr_1.3fr] gap-30 items-start max-md:grid-cols-1 max-md:gap-12">
+        <div className="sticky top-30 max-md:static">
+          <div
+            data-mark
+            className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4"
+          >
+            The Books
+          </div>
+          <h2
+            data-split
+            className="font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6"
+          >
+            Two books.
+            <span className="block text-gold-dark mt-2">
+              Three decades distilled.
+            </span>
+          </h2>
+          <p className="reveal reveal-delay-2 font-sans text-charcoal-soft text-[17px] leading-[1.7] max-w-[360px]">
+            Danston has written two books on what restoration looks like in
+            practice &mdash; for leaders, for organisations, and for the
+            people they meet.
+          </p>
+        </div>
+        <ul className="list-none grid grid-cols-2 gap-10 max-md:grid-cols-1 max-md:gap-12">
+          {BOOKS.map((b, i) => (
+            <li key={i} className="reveal flex flex-col">
+              <div className="relative aspect-[3/4] bg-navy overflow-hidden mb-7">
+                {b.cover ? (
+                  <Image
+                    src={b.cover}
+                    alt={b.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 30vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-cream/40 font-sans text-[10px] tracking-[2px] uppercase text-center px-6 border border-dashed border-cream/15">
+                    Cover
+                    <br />
+                    placeholder
+                  </div>
+                )}
+              </div>
+              <div className="font-sans text-charcoal-soft text-[10px] tracking-[2.5px] uppercase mb-3">
+                {b.subtitle}
+              </div>
+              <h3 className="font-serif font-normal text-navy text-[clamp(22px,2vw,28px)] leading-[1.25] mb-4">
+                {b.title}
+              </h3>
+              <p className="font-sans text-charcoal-soft text-[15px] leading-[1.7] mb-6">
+                {b.body}
+              </p>
+              <a
+                href={b.href ?? "#"}
+                className="self-start inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 transition-colors duration-500 ease-smooth hover:text-gold-dark hover:border-gold"
+              >
+                <span aria-hidden="true">→</span>
+                {b.href ? "Read more" : "[Buy / download link]"}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-navy-deep text-cream/60 px-[var(--rail-x)] py-16 border-t border-gold/15">
@@ -416,7 +515,7 @@ export function Footer() {
             href="mailto:hello@code1.one"
             className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
           >
-            Email
+            Write to Danston
           </a>
           <a
             href="#"

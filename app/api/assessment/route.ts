@@ -22,10 +22,10 @@ function validate(input: unknown): AssessmentPayload | { error: string } {
   if (!isStr(r.email, 320) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r.email))
     return { error: "email" };
   for (const k of [
-    "challenge",
+    "holdingBack",
     "duration",
-    "triedBefore",
-    "successPicture",
+    "coachedBefore",
+    "region",
     "cost",
     "source",
     "nextStep",
@@ -34,10 +34,10 @@ function validate(input: unknown): AssessmentPayload | { error: string } {
   }
   return {
     audience: r.audience as AssessmentPayload["audience"],
-    challenge: r.challenge as string,
+    holdingBack: r.holdingBack as string,
     duration: r.duration as string,
-    triedBefore: r.triedBefore as string,
-    successPicture: r.successPicture as string,
+    coachedBefore: r.coachedBefore as string,
+    region: r.region as string,
     cost: r.cost as string,
     commitment,
     workMode: r.workMode as AssessmentPayload["workMode"],

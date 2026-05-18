@@ -5,6 +5,12 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export function SmoothScroll() {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -18,6 +24,12 @@ export function SmoothScroll() {
       lerp: 0.1,
     });
 
+    // Exposed so navigation handlers / scroll-restoration logic can reset
+    // Lenis's internal target during jumps (e.g. clicking anchors, route
+    // changes). Without this, programmatic scroll fights Lenis's
+    // interpolation and the page snaps back to wherever Lenis was easing.
+    window.__lenis = lenis;
+
     const onScroll = () => ScrollTrigger.update();
     lenis.on("scroll", onScroll);
 
@@ -29,6 +41,7 @@ export function SmoothScroll() {
       gsap.ticker.remove(onTick);
       lenis.off("scroll", onScroll);
       lenis.destroy();
+      delete window.__lenis;
       gsap.ticker.lagSmoothing(500, 33);
     };
   }, []);
