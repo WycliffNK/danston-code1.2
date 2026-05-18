@@ -74,7 +74,7 @@ const INITIAL: FormState = {
 };
 
 const optionBase =
-  "font-sans text-[13px] text-cream bg-cream/[0.04] border-[0.5px] border-cream/20 px-5 py-4.5 rounded-sm cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] hover:border-gold hover:bg-gold/10 active:scale-[0.99] text-left";
+  "font-sans text-base sm:text-[13px] text-cream bg-cream/[0.04] border-[0.5px] border-cream/20 px-5 py-4 sm:py-4.5 rounded-sm cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] hover:border-gold hover:bg-gold/10 active:scale-[0.99] text-left";
 const optionSelected = "border-gold bg-gold/15 text-gold";
 
 const inputBase =
@@ -302,7 +302,7 @@ export function Assessment() {
                 <button
                   key={n}
                   type="button"
-                  className={`bg-cream/[0.04] border-[0.5px] border-cream/20 py-3.5 rounded-sm font-sans text-[13px] text-cream cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] text-center hover:border-gold active:scale-[0.96] ${
+                  className={`bg-cream/[0.04] border-[0.5px] border-cream/20 py-4 sm:py-3.5 rounded-sm font-sans text-base sm:text-[13px] text-cream cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] text-center hover:border-gold active:scale-[0.96] ${
                     state.commitment === n ? "border-gold bg-gold text-navy" : ""
                   }`}
                   onClick={() => update("commitment", n)}
@@ -366,7 +366,7 @@ export function Assessment() {
         {!completed && (
           <>
             {errorMessage && (
-              <div className="font-sans text-[13px] text-[#f6b8a8] -mt-5 mb-6">
+              <div className="font-sans text-base sm:text-[13px] text-[#f6b8a8] -mt-5 mb-6">
                 {errorMessage}
               </div>
             )}

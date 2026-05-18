@@ -153,7 +153,7 @@ function Panel({
       ref={ref}
       data-system-panel
       data-system-panel-index={index}
-      className={`w-screen h-screen flex-shrink-0 overflow-hidden max-md:w-full max-md:min-h-screen ${bg} ${textPrimary}`}
+      className={`w-screen h-screen flex-shrink-0 overflow-hidden max-md:w-full max-md:h-auto max-md:min-h-0 ${bg} ${textPrimary}`}
     >
       <div className="h-full px-[var(--rail-x)] pt-28 pb-12 flex flex-col max-md:pt-22 max-md:pb-10">
         <div className="flex items-center justify-between">

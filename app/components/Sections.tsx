@@ -6,7 +6,7 @@ import { SystemHorizontal } from "./SystemHorizontal";
 export function Hero() {
   return (
     <section className="relative grid grid-cols-2 h-screen bg-cream max-md:grid-cols-1 max-md:h-auto max-md:min-h-screen">
-      <div className="flex flex-col justify-center items-start pl-[var(--rail-x)] pr-14 pt-[90px] pb-20 h-full max-md:pl-6 max-md:pr-6 max-md:py-10 max-md:h-auto max-md:min-h-screen">
+      <div className="flex flex-col justify-center items-start pl-[var(--rail-x)] pr-14 pt-[90px] pb-20 h-full max-md:pl-6 max-md:pr-6 max-md:pt-[110px] max-md:pb-12 max-md:h-auto">
         <div data-hero-rule className="w-12 h-px bg-gold mb-7" />
         <h1
           data-hero-headline
@@ -31,18 +31,18 @@ export function Hero() {
         >
           London &middot; Africa &middot; Global
         </div>
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-4 w-full max-md:flex-col max-md:items-stretch max-md:gap-4">
           <a
             data-hero-cta
             href="#assessment"
-            className="inline-block font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full [transition:background-color_180ms_var(--ease-out),border-color_180ms_var(--ease-out),color_180ms_var(--ease-out),transform_180ms_var(--ease-out)] hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5 active:scale-[0.97]"
+            className="inline-block text-center font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full [transition:background-color_180ms_var(--ease-out),border-color_180ms_var(--ease-out),color_180ms_var(--ease-out),transform_180ms_var(--ease-out)] hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5 active:scale-[0.97] max-md:block max-md:w-full max-md:px-6"
           >
             Begin Free Assessment &middot; 10 min
           </a>
           <a
             data-hero-cta
             href="#about"
-            className="inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 [transition:color_200ms_var(--ease-out),border-color_200ms_var(--ease-out)] hover:text-gold-dark hover:border-gold"
+            className="inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 [transition:color_200ms_var(--ease-out),border-color_200ms_var(--ease-out)] hover:text-gold-dark hover:border-gold max-md:self-start"
           >
             <span aria-hidden="true">↓</span>
             Read Danston&apos;s story
@@ -205,7 +205,7 @@ export function PullQuote() {
   return (
     <section
       data-pullquote
-      className="relative overflow-hidden bg-navy text-cream text-center px-[var(--rail-x)] min-h-screen flex items-center justify-center py-32 max-md:py-25"
+      className="relative overflow-hidden bg-navy text-cream text-center px-[var(--rail-x)] min-h-screen flex items-center justify-center py-32 max-md:py-24 max-md:min-h-[70vh]"
     >
       <div
         data-pullquote-image
@@ -469,7 +469,7 @@ export function Books() {
               <h3 className="font-serif font-normal text-navy text-[clamp(22px,2vw,28px)] leading-[1.25] mb-4">
                 {b.title}
               </h3>
-              <p className="font-sans text-charcoal-soft text-[15px] leading-[1.7] mb-6">
+              <p className="font-sans text-charcoal-soft text-base leading-[1.7] mb-6 sm:text-[15px]">
                 {b.body}
               </p>
               <a
@@ -498,7 +498,7 @@ export function Footer() {
             className="h-5 w-auto opacity-80"
           />
           <div className="flex flex-col gap-1">
-            <div className="font-sans text-[15px]">
+            <div className="font-sans text-base sm:text-[15px]">
               Because your potential is always the highest priority.
             </div>
             <div className="font-sans text-cream/45 text-[10px] tracking-[2.5px] uppercase">
