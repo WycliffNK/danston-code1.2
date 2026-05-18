@@ -74,11 +74,11 @@ const INITIAL: FormState = {
 };
 
 const optionBase =
-  "font-sans text-[13px] text-cream bg-cream/[0.04] border-[0.5px] border-cream/20 px-5 py-4.5 rounded-sm cursor-pointer transition-all duration-500 ease-smooth hover:border-gold hover:bg-gold/10 text-left";
+  "font-sans text-[13px] text-cream bg-cream/[0.04] border-[0.5px] border-cream/20 px-5 py-4.5 rounded-sm cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] hover:border-gold hover:bg-gold/10 active:scale-[0.99] text-left";
 const optionSelected = "border-gold bg-gold/15 text-gold";
 
 const inputBase =
-  "w-full bg-transparent border-0 border-b-[0.5px] border-cream/30 py-4 text-cream text-[16px] font-sans mb-9 transition-colors duration-500 ease-smooth focus:outline-none focus:border-gold placeholder:text-cream/35";
+  "w-full bg-transparent border-0 border-b-[0.5px] border-cream/30 py-4 text-cream text-[16px] font-sans mb-9 [transition:border-color_200ms_var(--ease-out)] focus:outline-none focus:border-gold placeholder:text-cream/35";
 
 export function Assessment() {
   const [state, setState] = useState<FormState>(INITIAL);
@@ -192,7 +192,7 @@ export function Assessment() {
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <div
               key={i}
-              className={`flex-1 h-0.5 transition-colors duration-500 ease-smooth ${
+              className={`flex-1 h-0.5 [transition:background-color_250ms_var(--ease-out)] ${
                 i < step || completed ? "bg-gold" : "bg-cream/15"
               }`}
             />
@@ -302,7 +302,7 @@ export function Assessment() {
                 <button
                   key={n}
                   type="button"
-                  className={`bg-cream/[0.04] border-[0.5px] border-cream/20 py-3.5 rounded-sm font-sans text-[13px] text-cream cursor-pointer transition-all duration-500 ease-smooth text-center hover:border-gold ${
+                  className={`bg-cream/[0.04] border-[0.5px] border-cream/20 py-3.5 rounded-sm font-sans text-[13px] text-cream cursor-pointer [transition:border-color_200ms_var(--ease-out),background-color_200ms_var(--ease-out),color_200ms_var(--ease-out),transform_200ms_var(--ease-out)] text-center hover:border-gold active:scale-[0.96] ${
                     state.commitment === n ? "border-gold bg-gold text-navy" : ""
                   }`}
                   onClick={() => update("commitment", n)}
@@ -376,7 +376,7 @@ export function Assessment() {
                   type="button"
                   onClick={back}
                   disabled={status === "submitting"}
-                  className="bg-transparent text-cream/60 border-0 font-sans text-[11px] tracking-[1.5px] uppercase cursor-pointer py-2.5 transition-colors duration-500 ease-smooth hover:text-cream"
+                  className="bg-transparent text-cream/60 border-0 font-sans text-[11px] tracking-[1.5px] uppercase cursor-pointer py-2.5 [transition:color_200ms_var(--ease-out)] hover:text-cream"
                 >
                   ← Back
                 </button>
@@ -387,7 +387,7 @@ export function Assessment() {
                 type="button"
                 onClick={next}
                 disabled={!canAdvance() || status === "submitting"}
-                className="ml-auto bg-gold text-navy border-0 font-sans text-[12px] font-medium tracking-[1.5px] uppercase px-9 py-4 rounded-full cursor-pointer transition-all duration-500 ease-smooth hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(201,169,97,0.25)] disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
+                className="ml-auto bg-gold text-navy border-0 font-sans text-[12px] font-medium tracking-[1.5px] uppercase px-9 py-4 rounded-full cursor-pointer [transition:transform_180ms_var(--ease-out),box-shadow_180ms_var(--ease-out),opacity_180ms_var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(201,169,97,0.25)] active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
               >
                 {step === EMAIL_STEP
                   ? status === "submitting"

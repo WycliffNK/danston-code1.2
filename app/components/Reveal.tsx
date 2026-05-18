@@ -69,7 +69,7 @@ export function RevealObserver() {
           {
             yPercent: 0,
             duration: 1.1,
-            stagger: 0.16,
+            stagger: 0.1,
             ease: "power2.out",
             onComplete: () => split.revert(),
           },
@@ -124,7 +124,9 @@ export function RevealObserver() {
             ease: "power3.out",
             stagger: 0.08,
             overwrite: true,
-            clearProps: "transform,willChange",
+            onComplete: () => {
+              els.forEach((el) => (el as HTMLElement).classList.add("revealed"));
+            },
           });
           const marks = els.filter((e) =>
             (e as HTMLElement).hasAttribute("data-mark")
@@ -251,9 +253,8 @@ export function RevealObserver() {
           ease: "none",
           scrollTrigger: {
             trigger: pq,
-            start: "top top",
-            end: "+=60%",
-            pin: true,
+            start: "top 75%",
+            end: "bottom 35%",
             scrub: 0.6,
           },
         });

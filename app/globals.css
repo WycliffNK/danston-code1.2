@@ -14,6 +14,10 @@
 
   /* Smooth easing used everywhere interactive — slow stop, editorial feel. */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Stronger UI curves (Emil) — used for micro-interactions where the
+     editorial --ease-smooth is too soft. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* Shared content rail.
@@ -66,7 +70,7 @@
 /* Reveal animations — driven by GSAP ScrollTrigger.batch (see Reveal.tsx).
    Initial hidden state kept here so SSR + first paint don't flash before JS
    takes over. GSAP overrides inline styles on entry. */
-.reveal {
+.reveal:not(.revealed) {
   opacity: 0;
   transform: translateY(28px);
 }

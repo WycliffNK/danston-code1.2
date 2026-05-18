@@ -48,7 +48,7 @@ export function Nav() {
       <div className="flex items-center justify-between">
         <a
           href="#"
-          className="block transition-opacity duration-500 ease-smooth hover:opacity-70"
+          className="block [transition:opacity_200ms_var(--ease-out)] hover:opacity-70"
           aria-label="Code 1 — home"
         >
           <Image
@@ -62,7 +62,7 @@ export function Nav() {
         </a>
         <a
           href="#assessment"
-          className="font-sans text-[11px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-6 py-3 rounded-full transition-all duration-500 ease-smooth hover:bg-gold hover:border-gold hover:text-navy"
+          className="font-sans text-[11px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-6 py-3 rounded-full [transition:background-color_180ms_var(--ease-out),border-color_180ms_var(--ease-out),color_180ms_var(--ease-out),transform_180ms_var(--ease-out)] hover:bg-gold hover:border-gold hover:text-navy active:scale-[0.97]"
         >
           Begin Assessment
         </a>

@@ -57,7 +57,7 @@ export function Pathways() {
               <button
                 type="button"
                 onClick={onClick(p.audience)}
-                className="group relative w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-8 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
+                className="group relative w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-8 cursor-pointer [transition:transform_250ms_var(--ease-out)] will-change-transform hover:translate-x-4 active:scale-[0.99] text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
               >
                 <span
                   aria-hidden="true"
@@ -66,11 +66,11 @@ export function Pathways() {
                 />
                 <span
                   aria-hidden="true"
-                  className="absolute -top-px left-0 right-0 h-px bg-gold origin-left scale-x-0 transition-transform duration-700 ease-smooth group-hover:scale-x-100"
+                  className="absolute -top-px left-0 right-0 h-px bg-gold origin-left scale-x-0 [transition:transform_400ms_var(--ease-out)] group-hover:scale-x-100"
                 />
                 <span
                   data-pathway-content
-                  className="font-serif italic text-charcoal-soft text-[16px] transition-transform duration-500 ease-smooth group-hover:translate-x-2"
+                  className="font-serif italic text-charcoal-soft text-[16px] [transition:transform_250ms_var(--ease-out)] group-hover:translate-x-2"
                 >
                   {p.num}
                 </span>
@@ -82,7 +82,7 @@ export function Pathways() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="text-gold text-[22px] opacity-0 -translate-x-3 transition-[opacity,transform] duration-500 ease-smooth group-hover:opacity-100 group-hover:translate-x-0"
+                  className="text-gold text-[22px] opacity-0 -translate-x-3 [transition:opacity_200ms_var(--ease-out),transform_200ms_var(--ease-out)] group-hover:opacity-100 group-hover:translate-x-0"
                 >
                   →
                 </span>

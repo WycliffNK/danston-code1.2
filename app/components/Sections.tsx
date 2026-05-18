@@ -14,7 +14,7 @@ export function Hero() {
         >
           You&rsquo;ve built a lot.
           <span className="block text-gold-dark mt-3.5">
-            But something&rsquo;s off &mdash; and you know it.
+            But something&rsquo;s off, and you know it.
           </span>
         </h1>
         <p
@@ -35,14 +35,14 @@ export function Hero() {
           <a
             data-hero-cta
             href="#assessment"
-            className="inline-block font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full transition-all duration-500 ease-smooth hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5"
+            className="inline-block font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full [transition:background-color_180ms_var(--ease-out),border-color_180ms_var(--ease-out),color_180ms_var(--ease-out),transform_180ms_var(--ease-out)] hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5 active:scale-[0.97]"
           >
-            Begin Free Assessment &mdash; 10 min
+            Begin Free Assessment &middot; 10 min
           </a>
           <a
             data-hero-cta
             href="#about"
-            className="inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 transition-colors duration-500 ease-smooth hover:text-gold-dark hover:border-gold"
+            className="inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 [transition:color_200ms_var(--ease-out),border-color_200ms_var(--ease-out)] hover:text-gold-dark hover:border-gold"
           >
             <span aria-hidden="true">↓</span>
             Read Danston&apos;s story
@@ -351,7 +351,7 @@ export function About() {
   return (
     <section id="about" className="bg-cream-warm px-[var(--rail-x)] py-40 max-md:py-25">
       <div className="grid grid-cols-[1fr_1.5fr] gap-25 items-center max-md:grid-cols-1 max-md:gap-12">
-        <div data-parallax="36" className="relative aspect-[3/4] overflow-hidden bg-navy max-md:max-w-[280px] max-md:mx-auto">
+        <div className="relative aspect-[3/4] overflow-hidden bg-navy max-md:max-w-[280px] max-md:mx-auto">
           <Image
             src="/images/danston.png"
             alt=""
@@ -432,14 +432,10 @@ export function Books() {
           >
             The Books
           </div>
-          <h2
-            data-split
-            className="font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6"
-          >
+          <h2 className="reveal font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6">
             Two books.
-            <span className="block text-gold-dark mt-2">
-              Three decades distilled.
-            </span>
+            <br />
+            <span className="text-gold-dark">Three decades distilled.</span>
           </h2>
           <p className="reveal reveal-delay-2 font-sans text-charcoal-soft text-[17px] leading-[1.7] max-w-[360px]">
             Danston has written two books on what restoration looks like in
@@ -478,7 +474,7 @@ export function Books() {
               </p>
               <a
                 href={b.href ?? "#"}
-                className="self-start inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 transition-colors duration-500 ease-smooth hover:text-gold-dark hover:border-gold"
+                className="self-start inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 [transition:color_200ms_var(--ease-out),border-color_200ms_var(--ease-out)] hover:text-gold-dark hover:border-gold"
               >
                 <span aria-hidden="true">→</span>
                 {b.href ? "Read more" : "[Buy / download link]"}
@@ -494,7 +490,7 @@ export function Books() {
 export function Footer() {
   return (
     <footer className="bg-navy-deep text-cream/60 px-[var(--rail-x)] py-16 border-t border-gold/15">
-      <div className="reveal flex flex-wrap items-center justify-between gap-6 max-md:flex-col max-md:text-center">
+      <div className="flex flex-wrap items-center justify-between gap-6 max-md:flex-col max-md:text-center">
         <div className="flex items-center gap-6 max-md:flex-col max-md:gap-3">
           <img
             src="/logos/on-navy.svg"
@@ -513,13 +509,13 @@ export function Footer() {
         <div className="flex gap-8 text-[12px] tracking-[1.5px] uppercase">
           <a
             href="mailto:hello@code1.one"
-            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
+            className="relative text-cream/55 [transition:color_200ms_var(--ease-out)] hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:[transition:transform_350ms_var(--ease-out)] hover:after:scale-x-100"
           >
             Write to Danston
           </a>
           <a
             href="#"
-            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
+            className="relative text-cream/55 [transition:color_200ms_var(--ease-out)] hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:[transition:transform_350ms_var(--ease-out)] hover:after:scale-x-100"
           >
             LinkedIn
           </a>
