@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AfricaImage } from "./AfricaImage";
+import { BookPreorderCTA } from "./BookPreorder";
 import { CredibilitySentence } from "./CredibilitySentence";
 import { SystemHorizontal } from "./SystemHorizontal";
 
@@ -472,13 +473,7 @@ export function Books() {
               <p className="font-sans text-charcoal-soft text-base leading-[1.7] mb-6 sm:text-[15px]">
                 {b.body}
               </p>
-              <a
-                href={b.href ?? "#"}
-                className="self-start inline-flex items-center gap-3 font-sans text-[11px] font-medium tracking-[2px] uppercase text-navy border border-navy/30 rounded-full px-6 py-3 [transition:background-color_220ms_var(--ease-out),color_220ms_var(--ease-out),border-color_220ms_var(--ease-out)] hover:bg-navy hover:text-cream hover:border-navy"
-              >
-                {b.href ? "Buy the book" : "Buy the book"}
-                <span aria-hidden="true">→</span>
-              </a>
+              <BookPreorderCTA bookTitle={b.title} />
             </li>
           ))}
         </ul>
