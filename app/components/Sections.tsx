@@ -406,17 +406,17 @@ type Book = {
 
 const BOOKS: Book[] = [
   {
-    title: "[Book one title]",
+    title: "One Shot",
     subtitle: "On first impressions.",
-    body: "[Placeholder — short description from Danston. One or two sentences on what the book is about and who it is for.]",
-    cover: undefined,
+    body: "One Shot reveals the invisible psychology of presence — teaching leaders, executives, entrepreneurs, and teams how to instantly command respect, trust, influence, and authority. In business and in life, the room often decides who you are before you ever speak.",
+    cover: "/images/one-shot.jpg",
     href: undefined,
   },
   {
-    title: "[Book two title]",
+    title: "S.I.D — Self Identity Matters Most",
     subtitle: "On self-identity.",
-    body: "[Placeholder — short description from Danston. One or two sentences on what the book is about and who it is for.]",
-    cover: undefined,
+    body: "How you see yourself determines the quality of your entire life. Through ten decisions, Danston guides readers to rebuild their mindset, take ownership, and become the highest version of themselves. Change your self-identity, and you change your future.",
+    cover: "/images/sid.jpg",
     href: undefined,
   },
 ];
@@ -474,10 +474,10 @@ export function Books() {
               </p>
               <a
                 href={b.href ?? "#"}
-                className="self-start inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[2px] uppercase text-charcoal-soft border-b border-navy/15 pb-1 [transition:color_200ms_var(--ease-out),border-color_200ms_var(--ease-out)] hover:text-gold-dark hover:border-gold"
+                className="self-start inline-flex items-center gap-3 font-sans text-[11px] font-medium tracking-[2px] uppercase text-navy border border-navy/30 rounded-full px-6 py-3 [transition:background-color_220ms_var(--ease-out),color_220ms_var(--ease-out),border-color_220ms_var(--ease-out)] hover:bg-navy hover:text-cream hover:border-navy"
               >
+                {b.href ? "Buy the book" : "Buy the book"}
                 <span aria-hidden="true">→</span>
-                {b.href ? "Read more" : "[Buy / download link]"}
               </a>
             </li>
           ))}
