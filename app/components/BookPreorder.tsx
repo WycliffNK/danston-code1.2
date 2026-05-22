@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const PRICE = "$9.99";
 const EARLY_BIRD_PRICE = "$5";
@@ -47,10 +48,15 @@ function PreorderModal({ bookTitle, onClose }: ModalProps) {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const nameId = useId();
   const emailId = useId();
   const countryId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -86,7 +92,9 @@ function PreorderModal({ bookTitle, onClose }: ModalProps) {
     }
   }
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -205,7 +213,8 @@ function PreorderModal({ bookTitle, onClose }: ModalProps) {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
