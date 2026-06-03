@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { AUDIENCES, WORK_MODES, type AssessmentPayload } from "@/lib/assessment";
 import { appendAssessmentRow } from "@/lib/google-sheets";
+import { sendAssessmentEmail } from "@/lib/email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -69,15 +70,29 @@ export async function POST(request: Request) {
     userAgent: request.headers.get("user-agent") ?? "",
   };
 
-  // Best-effort Sheets write. Stub returns "not-configured" until creds exist.
-  const append = await appendAssessmentRow(payload);
+  // Best-effort persistence + notification, run concurrently. Both return
+  // "not-configured" until their env vars exist, so a missing integration
+  // never fails the submission.
+  const [append, email] = await Promise.all([
+    appendAssessmentRow(payload),
+    sendAssessmentEmail(payload),
+  ]);
+
   if (!append.ok && append.reason === "error") {
     console.error("[assessment] sheets append failed", append.message);
+  }
+  if (!email.ok && email.reason === "error") {
+    console.error("[assessment] email send failed", email.message);
   }
 
   return NextResponse.json({
     ok: true,
     persisted: append.ok,
-    pending: !append.ok && append.reason === "not-configured",
+    notified: email.ok,
+    pending:
+      !append.ok &&
+      append.reason === "not-configured" &&
+      !email.ok &&
+      email.reason === "not-configured",
   });
 }

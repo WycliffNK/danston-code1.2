@@ -503,7 +503,7 @@ export function Footer() {
         </div>
         <div className="flex gap-8 text-[12px] tracking-[1.5px] uppercase">
           <a
-            href="mailto:hello@code1.one"
+            href="mailto:danstunmugarura@gmail.com"
             className="relative text-cream/55 [transition:color_200ms_var(--ease-out)] hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:[transition:transform_350ms_var(--ease-out)] hover:after:scale-x-100"
           >
             Write to Danston
