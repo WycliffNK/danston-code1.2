@@ -402,7 +402,8 @@ type Book = {
   subtitle: string;
   body: string;
   cover?: string;
-  href?: string;
+  purchaseUrl: string;
+  price: string;
 };
 
 const BOOKS: Book[] = [
@@ -411,14 +412,16 @@ const BOOKS: Book[] = [
     subtitle: "On first impressions.",
     body: "One Shot reveals the invisible psychology of presence — teaching leaders, executives, entrepreneurs, and teams how to instantly command respect, trust, influence, and authority. In business and in life, the room often decides who you are before you ever speak.",
     cover: "/images/one-shot.jpg",
-    href: undefined,
+    purchaseUrl: "https://buy.stripe.com/8x2aEZ1r616rbJ9dR89MY00",
+    price: "£8.99",
   },
   {
     title: "S.I.D — Self Identity Matters Most",
     subtitle: "On self-identity.",
     body: "How you see yourself determines the quality of your entire life. Through ten decisions, Danston guides readers to rebuild their mindset, take ownership, and become the highest version of themselves. Change your self-identity, and you change your future.",
     cover: "/images/sid.jpg",
-    href: undefined,
+    purchaseUrl: "https://buy.stripe.com/00w6oJedS7uP28z28q9MY01",
+    price: "£9.99",
   },
 ];
 
@@ -473,7 +476,7 @@ export function Books() {
               <p className="font-sans text-charcoal-soft text-base leading-[1.7] mb-6 sm:text-[15px]">
                 {b.body}
               </p>
-              <BookPreorderCTA bookTitle={b.title} />
+              <BookPreorderCTA bookTitle={b.title} purchaseUrl={b.purchaseUrl} price={b.price} />
             </li>
           ))}
         </ul>
