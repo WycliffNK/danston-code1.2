@@ -509,7 +509,9 @@ export function Footer() {
             Write to Danston
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/danston-m-88bbb172"
+            target="_blank"
+            rel="noopener noreferrer"
             className="relative text-cream/55 [transition:color_200ms_var(--ease-out)] hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:[transition:transform_350ms_var(--ease-out)] hover:after:scale-x-100"
           >
             LinkedIn
