@@ -1,4 +1,5 @@
 import { Nav } from "./components/Nav";
+import { AnnouncementBar } from "./components/AnnouncementBar";
 import { RevealObserver } from "./components/Reveal";
 import {
   About,
@@ -12,11 +13,13 @@ import {
   System,
 } from "./components/Sections";
 import { Pathways } from "./components/Pathways";
+import { ProgrammesSection } from "./components/ProgrammesSection";
 import { Assessment } from "./components/Assessment";
 
 export default function Home() {
   return (
     <>
+      <AnnouncementBar />
       <Nav />
       <RevealObserver />
       <main>
@@ -24,6 +27,7 @@ export default function Home() {
         <PullQuote />
         <Problem />
         <Credibility />
+        <ProgrammesSection />
         <Pathways />
         <System />
         <About />
