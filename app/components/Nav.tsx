@@ -27,15 +27,9 @@ const PROGRAMMES = [
   },
 ];
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "#books", label: "Books" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-];
-
-export function Nav() {
+export function Nav({ barOffset = 44 }: { barOffset?: number }) {
   const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProgOpen, setMobileProgOpen] = useState(false);
@@ -48,6 +42,7 @@ export function Nav() {
     lastYRef.current = window.scrollY;
 
     const SHOW_NEAR_TOP = 80;
+    const FLOAT_THRESHOLD = 200;
     const DEAD_ZONE = 6;
 
     const update = () => {
@@ -61,6 +56,7 @@ export function Nav() {
       } else if (delta < -DEAD_ZONE) {
         setHidden(false);
       }
+      setScrolled(y > FLOAT_THRESHOLD);
       lastYRef.current = y;
       tickingRef.current = false;
     };
@@ -75,7 +71,6 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -87,8 +82,10 @@ export function Nav() {
 
   return (
     <>
+      {/* ── Main nav ── */}
       <nav
-        className={`fixed inset-x-0 top-0 z-[100] px-[var(--rail-x)] py-5 transition-transform duration-500 ease-smooth will-change-transform ${
+        style={{ top: barOffset }}
+        className={`fixed inset-x-0 z-[100] px-[var(--rail-x)] py-5 transition-[top,transform] duration-300 ease-smooth will-change-transform ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
@@ -140,9 +137,12 @@ export function Nav() {
                 </svg>
               </button>
 
+              {/* Invisible bridge */}
+              <div className="absolute top-full left-0 right-0 h-3" />
+
               {/* Dropdown panel */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[380px] bg-cream border border-navy/10 shadow-[0_8px_40px_rgba(15,27,45,0.12)] transition-all duration-200 origin-top ${
+                className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[380px] bg-cream border border-navy/10 shadow-[0_8px_40px_rgba(15,27,45,0.12)] transition-all duration-200 origin-top ${
                   dropdownOpen
                     ? "opacity-100 scale-y-100 pointer-events-auto"
                     : "opacity-0 scale-y-95 pointer-events-none"
@@ -168,7 +168,6 @@ export function Nav() {
               </div>
             </div>
 
-            <Link href="#assessment" className={linkClass}>Assessment</Link>
             <Link href="#books" className={linkClass}>Books</Link>
             <Link href="#about" className={linkClass}>About</Link>
             <Link href="#contact" className={linkClass}>Contact</Link>
@@ -198,7 +197,26 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
+      {/* ── Floating assessment button — appears when nav is hidden ── */}
+      <a
+        href="#assessment"
+        aria-label="Begin Assessment"
+        className={`fixed bottom-7 right-6 z-[110] flex items-center gap-2.5 bg-navy text-cream shadow-[0_4px_24px_rgba(15,27,45,0.30)] px-5 py-3 rounded-full transition-all duration-300 ease-smooth group hover:bg-gold hover:text-navy ${
+          scrolled
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
+        {/* Pencil / form icon */}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
+          <path d="M9.5 1.5l3 3L4 13H1v-3L9.5 1.5z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <span className="font-sans text-[10px] font-medium tracking-[1.5px] uppercase">
+          Assessment
+        </span>
+      </a>
+
+      {/* ── Mobile menu overlay ── */}
       <div
         className={`fixed inset-0 z-[90] bg-cream flex flex-col px-[var(--rail-x)] pt-28 pb-10 transition-opacity duration-300 md:hidden ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -237,9 +255,6 @@ export function Nav() {
             )}
           </div>
 
-          <Link href="#assessment" className="font-sans text-[13px] tracking-[2px] uppercase text-navy py-4 border-b border-navy/10 hover:text-gold transition-colors" onClick={() => setMobileOpen(false)}>
-            Assessment
-          </Link>
           <Link href="#books" className="font-sans text-[13px] tracking-[2px] uppercase text-navy py-4 border-b border-navy/10 hover:text-gold transition-colors" onClick={() => setMobileOpen(false)}>
             Books
           </Link>
