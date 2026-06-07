@@ -7,7 +7,7 @@ import { SystemHorizontal } from "./SystemHorizontal";
 export function Hero() {
   return (
     <section className="relative grid grid-cols-2 h-screen bg-cream max-md:grid-cols-1 max-md:h-auto max-md:min-h-screen">
-      <div className="flex flex-col justify-center items-start pl-[var(--rail-x)] pr-14 pt-[90px] pb-20 h-full max-md:pl-6 max-md:pr-6 max-md:pt-[110px] max-md:pb-12 max-md:h-auto">
+      <div className="flex flex-col justify-center items-start pl-[var(--rail-x)] pr-14 pt-[134px] pb-20 h-full max-md:pl-6 max-md:pr-6 max-md:pt-[154px] max-md:pb-12 max-md:h-auto">
         <div data-hero-rule className="w-12 h-px bg-gold mb-7" />
         <h1
           data-hero-headline

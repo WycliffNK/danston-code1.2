@@ -1,5 +1,4 @@
-import { Nav } from "./components/Nav";
-import { AnnouncementBar } from "./components/AnnouncementBar";
+import { SiteHeader } from "./components/SiteHeader";
 import { RevealObserver } from "./components/Reveal";
 import {
   About,
@@ -19,8 +18,7 @@ import { Assessment } from "./components/Assessment";
 export default function Home() {
   return (
     <>
-      <AnnouncementBar />
-      <Nav />
+      <SiteHeader />
       <RevealObserver />
       <main>
         <Hero />

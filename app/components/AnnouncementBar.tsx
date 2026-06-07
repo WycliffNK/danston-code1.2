@@ -9,7 +9,7 @@ export function AnnouncementBar() {
   if (dismissed) return null;
 
   return (
-    <div className="relative z-[110] bg-navy border-b border-gold/20 px-[var(--rail-x)] py-3">
+    <div className="fixed inset-x-0 top-0 z-[120] bg-navy border-b border-gold/20 px-[var(--rail-x)] py-3">
       <div className="flex items-center justify-center gap-4 flex-wrap">
         {/* Pulse dot */}
         <span className="relative flex h-2 w-2 shrink-0">
