@@ -36,6 +36,16 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
   const lastYRef = useRef(0);
   const tickingRef = useRef(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openDropdown = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setDropdownOpen(true);
+  };
+
+  const closeDropdown = () => {
+    closeTimerRef.current = setTimeout(() => setDropdownOpen(false), 120);
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -117,8 +127,8 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
             <div
               ref={dropdownRef}
               className="relative"
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
+              onMouseEnter={openDropdown}
+              onMouseLeave={closeDropdown}
             >
               <button
                 className={`${linkClass} flex items-center gap-1.5`}
@@ -137,12 +147,11 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
                 </svg>
               </button>
 
-              {/* Invisible bridge */}
-              <div className="absolute top-full left-0 right-0 h-3" />
-
-              {/* Dropdown panel */}
+              {/* Dropdown panel — also cancels close timer on enter */}
               <div
-                className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[380px] bg-cream border border-navy/10 shadow-[0_8px_40px_rgba(15,27,45,0.12)] transition-all duration-200 origin-top ${
+                onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
+                className={`absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[380px] bg-cream border border-navy/10 shadow-[0_8px_40px_rgba(15,27,45,0.12)] transition-all duration-200 origin-top ${
                   dropdownOpen
                     ? "opacity-100 scale-y-100 pointer-events-auto"
                     : "opacity-0 scale-y-95 pointer-events-none"
