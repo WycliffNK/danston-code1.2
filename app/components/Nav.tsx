@@ -29,7 +29,6 @@ const PROGRAMMES = [
 
 export function Nav({ barOffset = 44 }: { barOffset?: number }) {
   const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProgOpen, setMobileProgOpen] = useState(false);
@@ -53,7 +52,6 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
     lastYRef.current = window.scrollY;
 
     const SHOW_NEAR_TOP = 80;
-    const FLOAT_THRESHOLD = 200;
     const DEAD_ZONE = 6;
 
     const update = () => {
@@ -67,7 +65,6 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
       } else if (delta < -DEAD_ZONE) {
         setHidden(false);
       }
-      setScrolled(y > FLOAT_THRESHOLD);
       lastYRef.current = y;
       tickingRef.current = false;
     };
@@ -177,7 +174,7 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
             <Link href="#contact" className={linkClass}>Contact</Link>
           </div>
 
-          {/* CTA + mobile hamburger */}
+          {/* CTA + hamburger */}
           <div className="flex items-center gap-4">
             <Link
               href="#assessment"
@@ -185,7 +182,6 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
             >
               Begin Assessment
             </Link>
-
             {/* Hamburger */}
             <button
               className="md:hidden flex flex-col gap-[5px] p-1"
@@ -201,24 +197,7 @@ export function Nav({ barOffset = 44 }: { barOffset?: number }) {
         </div>
       </nav>
 
-      {/* ── Floating assessment button — appears when nav is hidden ── */}
-      <a
-        href="#assessment"
-        aria-label="Begin Assessment"
-        className={`fixed bottom-7 right-6 z-[110] flex items-center gap-2.5 bg-navy text-cream shadow-[0_4px_24px_rgba(15,27,45,0.30)] px-5 py-3 rounded-full transition-all duration-300 ease-smooth group hover:bg-gold hover:text-navy ${
-          scrolled
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 translate-y-4 pointer-events-none"
-        }`}
-      >
-        {/* Pencil / form icon */}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
-          <path d="M9.5 1.5l3 3L4 13H1v-3L9.5 1.5z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <span className="font-sans text-[10px] font-medium tracking-[1.5px] uppercase">
-          Assessment
-        </span>
-      </a>
+
 
       {/* ── Mobile menu overlay ── */}
       <div
