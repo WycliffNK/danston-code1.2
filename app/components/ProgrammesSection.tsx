@@ -57,7 +57,7 @@ export function ProgrammesSection() {
             Choose the pathway<br className="hidden sm:block" /> that fits your moment.
           </h2>
           <Link
-            href="/programmes/code1-acquire"
+            href="/acquire"
             className="shrink-0 font-sans text-[11px] font-medium tracking-[1.5px] uppercase text-navy border-b border-navy/30 pb-1 hover:text-gold-dark hover:border-gold transition-colors duration-200 max-md:hidden"
           >
             View all programmes →
@@ -167,7 +167,7 @@ export function ProgrammesSection() {
       {/* Mobile view all */}
       <div className="mt-8 md:hidden">
         <Link
-          href="/programmes/code1-acquire"
+          href="/acquire"
           className="font-sans text-[11px] font-medium tracking-[1.5px] uppercase text-navy border-b border-navy/30 pb-1 hover:text-gold-dark hover:border-gold transition-colors duration-200"
         >
           View all programmes →

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 const PROGRAMMES = [
   {
-    href: "/programmes/code1-acquire",
+    href: "/acquire",
     name: "Code1 Acquire",
     description: "Sales and business development transformation.",
   },
